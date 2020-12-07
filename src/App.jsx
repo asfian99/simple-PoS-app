@@ -39,47 +39,89 @@ function App() {
   };
 
   return (
-    <div className="App">
-      Hello
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">nama barang</label>
-        <input
-          type="text"
-          id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <label htmlFor="price">harga</label>
-        <input
-          type="number"
-          id="price"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
-        <label htmlFor="sum">Jumlah</label>
-        <input
-          type="number"
-          id="sum"
-          value={sum}
-          onChange={(e) => setSum(e.target.value)}
-        />
-        <button type="submit">submit</button>
-      </form>
-      <List items={cart} />
-      <footer>
-        <form onSubmit={handleConfirm}>
-          <p>Total yang harus dibayar : Rp {total}</p>
-          <div>
-            <label htmlFor="paid">Uang Dibayarkan</label>
+    <div className="p-6 text-gray-700">
+      <h1 className="font-bold text-2xl text-center">Point of Sales</h1>
+      <form onSubmit={handleSubmit} className="mt-4 mb-8 mx-auto flex flex-col">
+        <div className="my-4 mx-auto flex flex-row gap-7">
+          <div className="flex flex-col">
+            <label className="uppercase font-medium" htmlFor="name">
+              Nama Barang
+            </label>
             <input
-              type="number"
-              id="paid"
-              value={paid}
-              onChange={(e) => setPaid(e.target.value)}
+              type="text"
+              id="name"
+              className="p-1 border-2"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
-          <button type="submit">Konfirmasi</button>
-          <p>Total Kembalian : Rp {cashback}</p>
+          <div className="flex flex-col">
+            <label className="uppercase font-medium" htmlFor="price">
+              Harga
+            </label>
+            <input
+              type="number"
+              id="price"
+              className="p-1 border-2"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </div>
+          <div className="flex flex-col">
+            <label className="uppercase font-medium" htmlFor="sum">
+              Jumlah
+            </label>
+            <input
+              type="number"
+              id="sum"
+              className="p-1 border-2"
+              value={sum}
+              onChange={(e) => setSum(e.target.value)}
+            />
+          </div>
+        </div>
+        <button
+          type="submit"
+          className="w-1/5 py-2 mx-auto bg-indigo-500 text-white font-medium rounded-md"
+        >
+          Submit
+        </button>
+      </form>
+      <List items={cart} />
+      <footer className="mt-8 p-4 bg-indigo-100 rounded-xl">
+        <form
+          onSubmit={handleConfirm}
+          className="flex flex-col gap-4 text-lg font-medium"
+        >
+          <div className="flex flex-row justify-between">
+            <p>Total yang harus dibayar : </p>
+            <p>Rp {total}</p>
+          </div>
+          <div className="flex flex-row justify-between">
+            <label htmlFor="paid" className="py-1">
+              Uang Dibayarkan :
+            </label>
+            <div className="flex flex-row">
+              <p className="p-1">Rp</p>
+              <input
+                type="number"
+                id="paid"
+                value={paid}
+                className="p-1 border-2"
+                onChange={(e) => setPaid(e.target.value)}
+              />
+            </div>
+          </div>
+          <button
+            type="submit"
+            className="py-2 bg-indigo-500 text-white rounded-md font-medium"
+          >
+            Konfirmasi
+          </button>
+          <div className="flex flex-row justify-between">
+            <p>Total Kembalian :</p>
+            <p> Rp {cashback}</p>
+          </div>
         </form>
       </footer>
     </div>
