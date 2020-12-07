@@ -1,8 +1,9 @@
 import { useState } from "react";
 import List from "./List";
 import EmptyAlert from "./EmptyAlert";
+// import { data } from "../data/data";
 
-const Home = () => {
+const Home = ({ transHandler }) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [sum, setSum] = useState(1);
@@ -10,7 +11,7 @@ const Home = () => {
   const [total, setTotal] = useState(0);
   const [paid, setPaid] = useState(0);
   const [cashback, setCashback] = useState(0);
-  // const [alert, setAlert] = useState("")
+  const [transaction, setTransaction] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,7 +33,7 @@ const Home = () => {
     setSum(1);
   };
 
-  const handleConfirm = (e) => {
+  const handlePaid = (e) => {
     e.preventDefault();
 
     if (paid >= total) {
@@ -40,6 +41,19 @@ const Home = () => {
     } else {
       setCashback(-(total - paid));
     }
+
+    setTransaction({
+      id: new Date().getTime().toString(),
+      items: cart,
+      total,
+      paid,
+    });
+    // console.log(transaction);
+  };
+
+  const handleConfirm = () => {
+    // const newTransaction = JSON.stringify(transaction);
+    transHandler({ ...transaction, cashback });
   };
 
   const deleteItem = (id) => {
@@ -49,9 +63,8 @@ const Home = () => {
   };
 
   return (
-    <div className="p-6 text-gray-700">
-      <h1 className="font-bold text-2xl text-center">Point of Sales</h1>
-      <form onSubmit={handleSubmit} className="mt-4 mb-8 mx-auto flex flex-col">
+    <>
+      <form onSubmit={handleSubmit} className="mt-2 mb-8 mx-auto flex flex-col">
         <div className="my-4 mx-auto flex flex-row gap-7">
           <div className="flex flex-col">
             <label className="uppercase font-medium" htmlFor="name">
@@ -105,7 +118,7 @@ const Home = () => {
 
       <footer className="mt-8 p-4 bg-indigo-100 rounded-xl">
         <form
-          onSubmit={handleConfirm}
+          onSubmit={handlePaid}
           className="flex flex-col gap-4 text-lg font-medium"
         >
           <div className="flex flex-row justify-between">
@@ -131,15 +144,24 @@ const Home = () => {
             type="submit"
             className="py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-md font-medium"
           >
-            Konfirmasi
+            Bayar
           </button>
           <div className="flex flex-row justify-between">
             <p>Total Kembalian :</p>
-            <p className={cashback < 0 && `text-red-500`}> Rp {cashback}</p>
+            <p className={cashback < 0 ? `text-red-500` : null}>
+              Rp {cashback}
+            </p>
           </div>
+
+          <button
+            onClick={handleConfirm}
+            className="py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-md font-medium"
+          >
+            Konfirmasi
+          </button>
         </form>
       </footer>
-    </div>
+    </>
   );
 };
 export default Home;
