@@ -1,3 +1,9 @@
+# Simple Point of Sales App
+
+Created using react.js & tailwindcss
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
