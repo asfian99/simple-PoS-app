@@ -4,13 +4,16 @@ const History = ({ list }) => {
   console.log(list);
   return (
     <>
-      <table className="w-full">
+      <h1 className="mt-6 text-center uppercase font-semibold text-lg">
+        Riwayat Transaksi
+      </h1>
+      <table className="mt-2 w-full">
         <thead>
           <tr>
-            <th>Nama Barang</th>
-            <th>Total Harga</th>
-            <th>Dibayarkan</th>
-            <th>Kembalian</th>
+            <th className="p-1 border bg-indigo-100">Nama Barang</th>
+            <th className="p-1 border bg-indigo-100">Total Harga</th>
+            <th className="p-1 border bg-indigo-100">Dibayarkan</th>
+            <th className="p-1 border bg-indigo-100">Kembalian</th>
           </tr>
         </thead>
         <tbody>
@@ -23,14 +26,17 @@ const History = ({ list }) => {
                     const { id, name, price, sum, sumPrice } = stuff;
                     return (
                       <ul key={id}>
-                        <li>{`${name} @${price} (x ${sum} = ${sumPrice})`}</li>
+                        <li>
+                          {`${name} @Rp ${price} (x ${sum} = `}
+                          <b>{`Rp ${sumPrice})`}</b>
+                        </li>
                       </ul>
                     );
                   })}
                 </td>
-                <td className="p-1 border">{total}</td>
-                <td className="p-1 border">{paid}</td>
-                <td className="p-1 border">{cashback}</td>
+                <td className="p-1 border">Rp {total}</td>
+                <td className="p-1 border">Rp {paid}</td>
+                <td className="p-1 border">Rp {cashback}</td>
               </tr>
             );
           })}

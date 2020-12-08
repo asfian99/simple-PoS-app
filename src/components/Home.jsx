@@ -54,6 +54,7 @@ const Home = ({ transHandler }) => {
   const handleConfirm = () => {
     // const newTransaction = JSON.stringify(transaction);
     transHandler({ ...transaction, cashback });
+    setCart([]);
   };
 
   const deleteItem = (id) => {
@@ -155,7 +156,7 @@ const Home = ({ transHandler }) => {
 
           <button
             onClick={handleConfirm}
-            className="py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-md font-medium"
+            className="py-2 bg-green-500 hover:bg-green-600 text-white rounded-md font-medium"
           >
             Konfirmasi
           </button>
